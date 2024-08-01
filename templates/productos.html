@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heladeria - Productos</title>
+
+    <style>
+        /* Basic table styles */
+        body {
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: black;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: #3e8e41; /* Darker green */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Card container styles */
+        .card-container {
+            display: flex;
+            justify-content: space-between; /* Align cards to the right */
+            margin: 20px 0; /* Add margin above and below the cards */
+        }
+
+        /* Card styles */
+        .card {
+            width: 300px; /* Adjust width as needed */
+            background-color: white;
+            box-shadow: 0 3px 5px #3e8e41;
+            padding: 20px;
+            margin: 0 10px; /* Add margin between cards */
+        }
+
+        .card h2 {
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .logout{
+            background-color: #bd2525
+        }
+
+        .logout:hover {
+            background-color: #da1a1a; /* Darker red */
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="card">
+            <h2>Productos vendidos hoy {{ ventas }}</h2>
+        </div>
+        <a href="/logout">
+            <button class="button logout">Logout</button>
+        </a>
+    </div>
+    <div class="container">
+        
+        {% if id_producto != null %}
+            <h1>Productos de la Heladería con id: {{ id_producto }}</h1>
+        {% elif nombre_producto != null %}
+            <h1>Productos de la Heladería con nombre: {{ nombre_producto }}</h1>
+        {% else %}
+            <h1>Productos de la Heladería con sus Ingredientes</h1>
+        {% endif %}
+
+        <a href="/">
+            <button class="button">Regresar</button>
+        </a>
+
+        <!-- Si no existe el producto -->
+        {% if id_producto != null and productos|length == 0 %}
+            <div class="alert alert-danger" id="alerta">
+                <h3><strong>¡Atención!</strong> El producto con id "<strong>{{ id_producto }}</strong>" no existe</h3>
+            </div>
+        {% elif nombre_producto != null and productos|length == 0 %}
+            <div class="alert alert-danger" id="alerta">
+                <h3><strong>¡Atención!</strong> El producto con nombre "<strong>{{ nombre_producto }}</strong>" no existe</h3>
+            </div>
+        <!-- Si existe por lo menos un producto mostrarlo -->
+        {% else %}
+            <!-- Mostrar la rentabilidad del producto -->
+            {% if rentabilidad != null or costo != null %}
+                {% for producto in productos %}
+                    <div class="alert alert-danger" id="alerta">
+                        <h3><strong>¡Atención!</strong> Información del producto "<strong>{{ producto.nombre }}</strong>"</h3>
+                        {% if costo %}
+                            <h3>El costo de producción del producto es "<strong>{{ costo }}</strong>"</h3>
+                        {% endif %}
+                        {% if rentabilidad %}
+                            <h3>La rentabilidad del producto es "<strong>{{ rentabilidad }}</strong>"</h3>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Tipo de producto</th>
+                        <th>Volumen</th>
+                        <th>Tipo de vaso</th>
+                        {% if mostrar_calorias %}
+                            <th>Calorías</th>
+                        {% endif %}
+                        <th>Ingredientes</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in productos %}
+                    <tr>
+                        <td>{{ producto.id }}</td>
+                        <td>{{ producto.nombre }}</td>
+                        <td>{{ producto.precio_publico }}</td>
+                        <td>{{ producto.tipo_producto }}</td>
+                        <td>{{ producto.volumen }}</td>
+                        <td>{{ producto.tipo_vaso }}</td>
+                        {% if mostrar_calorias %}
+                            <td>{{ producto.calorias }}</td>
+                        {% endif %}
+                        <td>
+                            <ul>
+                                {% for ingrediente in producto.ingredientes %}
+                                <li>{{ ingrediente.nombre }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="/heladeria/vender?producto={{ producto.nombre }}">
+                                <button class="button">Vender</button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>

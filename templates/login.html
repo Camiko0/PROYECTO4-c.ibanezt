@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login de nuestro sistema</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+        }
+
+        h1 {
+            color: black;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: #3e8e41; /* Darker green */
+        }
+
+        /* Card container styles */
+        .card-container {
+            display: flex;
+            justify-content: space-between; /* Align cards to the center */
+            margin: 20px 0; /* Add margin above and below the cards */
+        }
+
+        /* Card styles */
+        .card {
+            width: 300px; /* Adjust width as needed */
+            background-color: white;
+            box-shadow: 0 3px 5px #3e8e41;
+            padding: 20px;
+            margin: 0 10px; /* Add margin between cards */
+        }
+
+        .card h2 {
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-form label {
+            margin-bottom: 5px;
+        }
+
+        .login-form input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <div class="card-container">
+            <div class="card">
+                <form action="/" method="post" class="login-form">
+                    <label for="username">Username del usuario:</label>
+                    <input type="text" name="username" id="username" required>
+                    <br>
+                    <label for="password">Contraseña del usuario:</label>
+                    <input type="password" name="password" id="password" required>
+                  
+                    <button class="button" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
