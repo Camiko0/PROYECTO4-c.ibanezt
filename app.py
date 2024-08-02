@@ -8,13 +8,13 @@ import utils
 import os
 import utils.validar_login
 from models.enum_roles import Roles_Enum
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 from db import db
 from controllers import controller_ingrediente
 from controllers import controller_producto
 
 #Cargar variables de entorno
-load_dotenv()
+load_dotenv(find_dotenv())
 
 secret_key = os.urandom(24)
 
