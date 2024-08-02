@@ -30,6 +30,7 @@ def get_ingrediente_by_id(id_ingrediente) -> str:
 @utils.validar_login.validar_rol(Roles_Enum.EMPLEADO)
 @login_required
 def get_ingrediente_by_name(nombre_ingrediente) -> str:
+    nombre_ingrediente = utils.formatear.reemplazarEspaciosDesdeUrl(nombre_ingrediente)
     ingredientes = Ingrediente.query.filter_by(nombre=nombre_ingrediente)
     #Validar la consulta realizada
     if ingredientes.count() > 0:

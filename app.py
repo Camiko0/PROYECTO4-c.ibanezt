@@ -4,6 +4,7 @@ from flask_login import LoginManager, login_required, login_user, logout_user
 from models.usuario import Usuario
 from heladeria import Heladeria
 import utils.variables_generales
+import utils.formatear
 import utils
 import os
 import utils.validar_login
@@ -79,6 +80,7 @@ def ventas():
 def vender():
     session = db.session
     producto = request.args.get('producto')
+    producto = utils.formatear.reemplazarEspaciosDesdeUrl(producto)
     heladeria = Heladeria()
     try:
         vendido=heladeria.vender(producto)

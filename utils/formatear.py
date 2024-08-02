@@ -5,3 +5,6 @@ def convertirStringToHtml(html_content: str) -> bool:
     response = make_response(html_content)
     response.headers['Content-Type'] = 'text/html'
     return response
+
+def reemplazarEspaciosDesdeUrl(valor: str) -> str:
+    return valor.replace('%20', ' ')

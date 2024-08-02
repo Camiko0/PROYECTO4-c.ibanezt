@@ -45,6 +45,8 @@ def get_producto_by_id_calorias(id_producto) -> str:
 @utils.validar_login.validar_rol(Roles_Enum.EMPLEADO)
 @login_required
 def get_producto_by_name(nombre_producto) -> str:
+    nombre_producto = utils.formatear.reemplazarEspaciosDesdeUrl(nombre_producto)
+    print(nombre_producto)
     productos = Producto.query.filter_by(nombre=nombre_producto)
     #Validar la consulta realizada
     if productos.count() > 0:
