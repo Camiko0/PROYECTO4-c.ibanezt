@@ -1,6 +1,7 @@
 from flask import render_template
 from models.models_bd import Producto
 import utils.funciones
+import utils.formatear
 import utils.validar_login
 from models.enum_roles import Roles_Enum
 from flask_login import login_required

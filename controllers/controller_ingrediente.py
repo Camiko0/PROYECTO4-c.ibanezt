@@ -1,7 +1,7 @@
 from flask import  render_template, request
 from models.models_bd import Ingrediente
-import utils.formatearHtml
 import utils.variables_generales
+import utils.formatear
 from db import db
 from models.enum_roles import Roles_Enum
 from flask_login import login_required
